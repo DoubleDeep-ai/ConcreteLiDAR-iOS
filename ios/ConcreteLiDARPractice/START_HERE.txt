@@ -1,0 +1,64 @@
+ConcreteLiDAR 가상 RGB 텍스처 연습 버전
+
+설치
+1. 현재 Xcode 프로젝트 전체 폴더를 Finder에서 복제하여 백업합니다.
+2. 실행 중인 앱을 Xcode의 정지 버튼으로 중지합니다.
+3. 제공한 ContentView.swift를 열고 전체 코드를 복사합니다.
+4. 기존 ConcreteLiDARPractice 프로젝트의 ContentView.swift 편집 영역에서 Command+A, Command+V.
+   파일을 추가하는 것이 아니라 기존 파일 내용 전체 교체입니다.
+5. Command+S, iPhone 13 Pro 시뮬레이터 선택, Command+R.
+   자동 생성된 App.swift는 변경하지 않습니다. 카메라 권한이나 외부 패키지는 필요 없습니다.
+
+추가 기능
+- 고정 시드로 합성 콘크리트 색상 패턴 1024 x 1024 픽셀 생성.
+- RGB 텍스처 표시 스위치 ON/OFF. OFF여도 형상과 치수는 그대로입니다.
+- OBJ에 UV 좌표와 재질 연결 추가.
+- MTL 파일의 map_Kd로 PNG를 참조.
+- 화면 스위치는 미리보기에만 적용됩니다. 저장 OBJ는 항상 텍스처를 포함합니다.
+- 구형 SwiftUI의 10개 항목 제한을 피하도록 Group으로 화면을 분리했습니다.
+
+저장 결과: 총 6개 파일
+synthetic_specimen.obj        면 형상 + UV + MTL 참조
+synthetic_material.mtl        PNG 참조와 재질 정의
+synthetic_texture.png         1024 x 1024 합성 RGB 무늬
+synthetic_specimen.ply        XYZ 점군(색상 없음)
+synthetic_measurements.csv    이론 치수(실측값 아님)
+README.txt                   단위 및 합성 데이터 설명
+
+저장 후 가져오기
+공유창을 닫고 앱 아래의 '저장 경로 복사'를 누릅니다.
+Finder > Command+Shift+G > 경로 붙여넣기 > Enter.
+열린 폴더의 6개 파일을 모두 바탕화면 등으로 복사합니다.
+경로가 복사되지 않으면 Xcode 콘솔의 SYNTHETIC_EXPORT_FOLDER: 다음 경로를 사용합니다.
+OBJ, MTL, PNG는 같은 폴더에 두고 파일명을 임의로 변경하지 않습니다.
+Windows로 옮길 때도 폴더 전체를 ZIP으로 묶어 옮기면 됩니다.
+
+Blender에서 보기
+파일 > 가져오기 > Wavefront (.obj)에서 synthetic_specimen.obj 선택.
+배율 1. 재질 가져오기 옵션이 있다면 켭니다.
+뷰포트 오른쪽 위 구 아이콘 중 '재질 미리보기(Material Preview)'를 선택합니다.
+솔리드 보기에서는 회색으로 보일 수 있습니다.
+OBJ가 MTL을, MTL이 PNG를 찾도록 세 파일을 같은 폴더에 유지합니다.
+화면 조명/색상 관리에 따라 앱과 Blender의 밝기는 다를 수 있습니다.
+
+검증 순서
+1. 시편이 보이는지 확인합니다.
+2. RGB 텍스처 표시 ON/OFF 시 형상은 그대로이고 표면 무늬만 바뀌는지 확인합니다.
+3. 저장한 PNG를 일반 이미지 뷰어로 열어 1024 x 1024인지 확인합니다.
+4. OBJ를 Blender 재질 미리보기로 열어 무늬가 연결되는지 확인합니다.
+5. 기본 500 x 500 x 150mm, 5층: 층 높이30mm/벽 단면1200mm².
+   사용자가 층 수를 바꾸면 그에 따라 계산값이 바뀝니다.
+
+한계
+- 실제 사진, 실제 카메라 RGB 데이터, 실제 LiDAR 데이터가 아닙니다.
+- 각 사각 면에 동일한 PNG 전체를 입히는 단순 UV 방식입니다.
+  면의 비율에 따라 무늬가 늘어나고 반복되며 실제 무늬 크기를 나타내지 않습니다.
+- 깊이, 거칠기, 기공, normal/displacement map을 생성하지 않습니다.
+- PNG 픽셀 수는 3D 형상 해상도 또는 mm 측정 정확도가 아닙니다.
+- 기존과 같이 내부 벽/층 접촉면도 포함됩니다.
+- 실제 센서 연결 후 RGB 투영, 가림 처리, 텍스처 아틀라스 생성은 별도 개발입니다.
+
+검증 상태
+코드 구조와 OBJ/MTL/PNG 연결 문자열을 점검했습니다.
+이 작업 환경에는 Xcode가 없어 실제 Swift 컴파일/시뮬레이터 실행은 미검증입니다.
+문제 발생 시 Xcode Command+5의 첫 빨간 오류를 캡처해 주세요.
