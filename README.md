@@ -1,166 +1,97 @@
 # ConcreteLiDAR-iOS
 
-**스마트폰 LiDAR를 활용한 3D 프린팅 콘크리트 형상 측정 — Blender 측정 기록과 iOS 프로토타입**
+**스마트폰 RGB–LiDAR를 활용한 3D 프린팅 콘크리트 적층 형상 측정 연구**
 
-<img src="screenshots/ios-simulator-preview.png" alt="가상 시편 미리보기와 치수 설정, 내보내기 버튼이 표시된 iOS 시뮬레이터 실행 화면" width="311">
+실물 시편의 재구성 메시에서 치수를 측정하고, 가상 시편 앱으로 형상 생성·파일 저장·Blender 확인 과정을 시험합니다. 목표는 적층 높이·폭·단면 형상을 측정할 때 스마트폰 기반 방법의 적용 범위와 오차를 정량적으로 평가하는 것입니다.
 
-*프로토타입의 실제 시뮬레이터 실행 화면입니다. 화면 속 시편과 텍스처는 가상으로 생성한 데이터입니다.*
+## 현재까지의 결과
 
-이 저장소는 실물 시편을 Polycam으로 스캔하고 Blender에서 치수를 측정한 연구 기록과, 가상 적층 시편을 표시하는 초기 iOS 프로토타입 자료를 담고 있습니다.
+| 구분 | 수행 내용 | 확인 자료 |
+| --- | --- | --- |
+| 실물 시편 연구 | Polycam으로 촬영한 시편 4개의 높이·변 길이·두께 기록 32개 정리 | [Blender 사진 5장과 전체 측정값](research/blender-measurements/) |
+| iOS 프로토타입 | 가상 시편 생성, 치수 설정, RGB 텍스처 생성·전환, 파일 저장 코드 | [Swift 소스](ios/ConcreteLiDARPractice/ContentView.swift) · [실행 방법](ios/README.md) |
+| 데이터 내보내기 | OBJ·MTL·PNG·PLY·CSV 예제 구성 및 Blender 불러오기 화면 확보 | [예제 파일](examples/synthetic-specimen/) |
+| 정확도 평가 | 동일 위치의 실물 기준 치수 확보 후 비교 예정 | [측정 기록 엑셀](research/blender-measurements/iphone-lidar-3dcp-measurements.xlsx) |
 
-> **현재 진행 상태:** 실물 시편의 측정 기록은 확보했으며, 기준 치수와 비교하는 정확도 검증은 진행 전입니다. 가상 시편 앱의 Swift 소스는 포함되어 있으며, Xcode 프로젝트 파일은 아직 포함되어 있지 않습니다.
+## 앱 실행 화면
 
-## 연구 목적
+<img src="screenshots/ios-simulator-preview.png" alt="가상 콘크리트 시편과 치수 설정, 텍스처 전환, 내보내기 기능이 표시된 iOS 실행 화면" width="311">
 
-스마트폰 RGB–LiDAR를 활용하여 3D 프린팅 콘크리트의 적층 높이, 폭, 단면적과 형상 오차를 평가하는 방법을 연구합니다. 실물 시편의 재구성 메시를 측정하고, 가상 시편으로 파일 형식과 시각화 방식을 확인하여 향후 기준 치수와의 비교 실험을 준비합니다.
+*가상 시편 앱의 시뮬레이터 실행 화면. SwiftUI·SceneKit으로 형상을 표시하고 RGB 텍스처와 모델 파일을 생성합니다.*
 
-## 실물 시편의 Blender 측정 결과
+## 실물 시편 측정
 
-**실물 시편 4개 · 치수 기록 32개 · Blender 화면 5장**
+**Polycam 촬영 → GLTF 내보내기 → Blender 치수 측정 → 엑셀 기록**
 
-측정 기록에 따르면 네 시편 모두 **2026년 9월 14일** Polycam으로 촬영하고 GLTF 형식으로 내보냈습니다. 이후 Blender에서 재구성 메시의 치수를 측정했습니다. 아래 결과는 뒤에서 소개하는 가상 앱 예제와 구분되는 실물 시편 연구 기록입니다.
+측정 기록에 기재된 촬영일은 네 시편 모두 **2026년 9월 14일**입니다. Blender에서 재구성 메시의 모서리 높이, 변 길이, 벽체 두께를 측정했습니다.
 
-<img src="research/blender-measurements/images/p03-img4-measurements.png" alt="높이, 변 길이, 벽체 두께가 표시된 P03 시편의 Blender 측정 화면" width="800">
+<img src="research/blender-measurements/images/p03-img4-measurements.png" alt="P03 실물 시편 재구성 메시의 높이, 변 길이, 벽체 두께 측정 화면" width="800">
 
-*P03 시편(IMG4): 모서리 높이 4개, 변 길이 4개, 벽체 두께 2개를 측정했습니다.*
+*P03: 높이 4개, 변 길이 4개, 두께 2개. 위치명은 각 사진 기준입니다.*
 
-[전체 측정값과 사진 5장 보기](research/blender-measurements/) · [측정 기록 엑셀 원본](research/blender-measurements/iphone-lidar-3dcp-measurements.xlsx)
+| 시편 | 기록 수 | 높이 범위 (mm) | 변 길이 범위 (mm) | 두께 범위 (mm) |
+| --- | ---: | ---: | ---: | ---: |
+| P01 | 4 | 182.530–188.387 | 521.420–531.639 | 미기록 |
+| P02 | 8 | 138.320–153.652 | 510.924–521.241 | 미기록 |
+| P03 | 10 | 180.292–194.800 | 510.022–531.399 | 37.154–46.772 |
+| P04 | 10 | 110.582–117.409 | 527.003–538.684 | 24.416–30.559 |
 
-| 시편 | 치수 기록 수 | 높이 범위 (mm) | 변 길이 범위 (mm) |
-| --- | ---: | ---: | ---: |
-| P01 | 4 | 182.530–188.387 | 521.420–531.639 |
-| P02 | 8 | 138.320–153.652 | 510.924–521.241 |
-| P03 | 10 | 180.292–194.800 | 510.022–531.399 |
-| P04 | 10 | 110.582–117.409 | 527.003–538.684 |
+범위는 서로 다른 위치의 측정값을 요약한 것입니다. **측정 오차나 반복성 지표는 아닙니다.**
 
-P03은 벽체 두께 2개(37.154–46.772 mm), P04는 4개(24.416–30.559 mm)도 기록했습니다. 위 범위는 서로 다른 위치에서 측정한 치수의 최솟값과 최댓값이며, 정확도나 반복 측정 오차를 의미하지 않습니다. 기준 치수가 비어 있어 평균 절대오차(MAE), 평균제곱근오차(RMSE), 상대오차는 아직 산출하지 않았습니다. 사진 기준 위치명과 측정 방향의 정합 여부도 확인이 필요합니다.
+[측정 위치 설명·전체 기록·사진 보기](research/blender-measurements/)
 
-## iOS 앱 소스와 실행 방법
+## 가상 시편 앱과 파일 확인
 
-[ContentView.swift 원본](ios/ConcreteLiDARPractice/ContentView.swift) · [Xcode 실행 안내](ios/README.md)
+**치수 설정 → 시편 생성 → 모델·텍스처 저장 → Blender 불러오기**
 
-이전에 제공한 RGB 텍스처 버전의 Swift 원본을 포함했습니다. SwiftUI·SceneKit으로 가상 시편을 표시하고, RGB 텍스처 생성과 OBJ·MTL·PNG·PLY·CSV 저장을 구현한 코드입니다. 실제 LiDAR를 수집하는 ARKit 코드는 포함되어 있지 않습니다.
+가상 시편은 설정 치수를 알고 있는 모델로 파일 형식, 좌표 단위와 표시 방식을 확인하는 데 사용합니다. 이 과정에서 정리한 데이터 처리 방식을 향후 실물 스캔 분석으로 확장하는 것이 개발 방향입니다.
 
-코드의 기본값은 **500 × 500 × 150 mm, 5층**입니다. 아래 기존 예제 파일은 **6층** 설정이므로 동일 조건을 확인하려면 앱의 층 수를 6으로 바꾸고 시편을 다시 생성하세요. 이번 업로드 환경에서는 Xcode 빌드를 실행하지 않았습니다.
-
-## 가상 시편의 기본 형상
-
-| 항목 | 설정값 |
-| --- | ---: |
-| 외측 폭 × 깊이 | 500 × 500 mm |
-| 전체 높이 | 150 mm |
-| 적층 수 | 6층 |
-| 층 높이 | 25 mm |
-| 벽체 두께 | 40 mm |
-
-앱 실행 화면에는 사각 고리 형태의 콘크리트 모델, RGB 텍스처 전환, 치수 설정, 내보내기 버튼이 표시되어 있습니다. 시뮬레이터에서 보이는 모습과 Blender의 재질 표시가 일치하는지는 별도로 확인해야 합니다.
-
-## 예제 데이터와 파일 형식
-
-가상 시편 예제는 다음 파일로 구성됩니다.
-
-- `synthetic_specimen.obj`: 메시 형상과 UV 좌표
-- `synthetic_material.mtl`: 재질 연결 정보
-- `synthetic_texture.png`: 절차적으로 생성한 1024 × 1024 RGB 표면 무늬
-- `synthetic_specimen.ply`: 색상과 신뢰도 정보가 없는 XYZ 좌표 샘플
-- `synthetic_measurements.csv`: 형상 설정으로 계산한 치수이며 실측값이 아님
-- `DATA_NOTES.txt`: 원본 데이터의 생성 조건과 한계
-
-파일은 [가상 시편 예제 폴더](examples/synthetic-specimen/)에서 확인할 수 있습니다. 재질 연결이 유지되도록 OBJ·MTL·PNG의 파일명을 바꾸지 않고 같은 폴더에 두세요.
-
-### RGB 텍스처 미리보기
-
-<img src="examples/synthetic-specimen/synthetic_texture.png" alt="카메라 촬영 이미지가 아닌, 가상으로 생성한 콘크리트 표면 RGB 텍스처" width="480">
-
-[OBJ 메시](examples/synthetic-specimen/synthetic_specimen.obj) · [PLY 좌표](examples/synthetic-specimen/synthetic_specimen.ply) · [RGB 텍스처 PNG](examples/synthetic-specimen/synthetic_texture.png)
-
-## 프로젝트 구조
-
-```text
-ConcreteLiDAR-iOS/
-├── README.md
-├── .gitignore
-├── ios/
-│   ├── README.md
-│   └── ConcreteLiDARPractice/
-│       ├── ContentView.swift
-│       └── START_HERE.txt
-├── research/
-│   └── blender-measurements/
-│       ├── README.md
-│       ├── iphone-lidar-3dcp-measurements.xlsx
-│       └── images/  (엑셀에 포함된 원본 사진 5장)
-├── screenshots/
-│   ├── ios-simulator-preview.png
-│   └── xcode-export-blender-preview.png
-└── examples/
-    └── synthetic-specimen/
-        ├── synthetic_specimen.obj
-        ├── synthetic_material.mtl
-        ├── synthetic_texture.png
-        ├── synthetic_specimen.ply
-        ├── synthetic_measurements.csv
-        └── DATA_NOTES.txt
-```
-
-## 프로토타입에서 확인되는 기능
-
-| 항목 | 확인 가능한 자료 |
+| 기능 | 구현 내용 |
 | --- | --- |
-| 3D 시편 미리보기 | 시뮬레이터 실행 사진에서 확인 |
-| 치수·적층 수 설정 | 폭, 깊이, 높이, 층 수 설정 화면 확인 |
-| RGB 텍스처 표시 | 화면의 전환 버튼과 예제 PNG 제공 |
-| 내보내기 화면 | OBJ·MTL·PNG·PLY·CSV 내보내기 버튼과 저장 상태 문구 확인 |
-| 예제 출력 파일 | UV가 있는 OBJ, MTL–PNG 연결, XYZ 전용 PLY, 계산 치수 CSV 제공 |
-| Swift 구현 소스 | ContentView.swift 원본과 실행 안내 제공; Xcode 프로젝트 파일은 미포함 |
+| 형상 생성 | 밑판 없는 사각 고리, 폭·깊이·높이·층 수 설정, 벽 두께 40 mm |
+| 시각화 | SceneKit 회전·확대·축소와 RGB 텍스처 전환 |
+| 텍스처 | 고정 시드로 1024 × 1024 RGB 표면 무늬 생성 |
+| 내보내기 | OBJ 메시·UV, MTL 재질 연결, PNG, XYZ 전용 PLY, 계산 치수 CSV |
+| 저장·공유 | 앱 문서 폴더 저장, 공유창, 저장 경로 복사 |
 
-실행 사진과 Swift 원본을 함께 제공합니다. 새 SwiftUI 앱 프로젝트를 만든 뒤 ContentView.swift를 교체하여 실행할 수 있도록 안내를 정리했습니다. 현재 환경에서는 컴파일과 전체 내보내기 과정을 다시 실행해 검증하지 않았습니다.
+### Blender로 불러온 화면
 
-## 가상 데이터의 한계
+<img src="screenshots/xcode-export-blender-preview.png" alt="Xcode 앱에서 생성한 가상 시편 파일을 Blender로 불러와 형상과 메시 구조를 확인한 화면" width="1000">
 
-- 모델·텍스처·치수는 생성한 예제로, LiDAR나 카메라로 측정한 데이터가 아닙니다.
-- PNG 무늬는 메시 면에 반복 적용됩니다. 무늬의 실제 크기는 보정되지 않았으며 형상 자체의 거칠기를 추가하지 않습니다.
-- PLY에는 색상과 신뢰도 없이 XYZ 샘플 12,640개가 포함됩니다. 실제 센서에서 보이지 않는 이상화된 면도 포함하므로 가시성과 측정 잡음을 재현하지 않습니다.
-- CSV의 치수는 형상 설정으로 계산한 값이며 측정 정확도의 근거가 아닙니다.
-- 실제 촬영, RGB–깊이 정합, 치수 오차 평가는 기기 실험과 기준 치수 확보가 필요합니다.
+사각 고리 형상과 적층 경계, 메시 구조를 확인한 화면입니다. 화면의 거리 표시는 선택한 두 점 사이의 값이며, 설정 폭과의 오차 비교에는 측정 끝점과 변환 상태 확인이 필요합니다.
 
-원본 생성 조건은 [DATA_NOTES.txt](examples/synthetic-specimen/DATA_NOTES.txt)에 보존되어 있습니다.
+[사진 원본](screenshots/xcode-export-blender-preview.png) · [OBJ](examples/synthetic-specimen/synthetic_specimen.obj) · [PLY](examples/synthetic-specimen/synthetic_specimen.ply) · [RGB 텍스처](examples/synthetic-specimen/synthetic_texture.png)
 
-## Xcode 생성 파일의 Blender 확인 화면
+### 실행과 예제 설정
 
-<img src="screenshots/xcode-export-blender-preview.png" alt="Xcode에서 생성한 가상 콘크리트 시편 파일을 Blender에서 불러와 형상과 메시를 확인한 화면" width="1000">
+[Xcode 실행 안내](ios/README.md)에 따라 새 SwiftUI 앱 프로젝트에 소스를 적용할 수 있습니다.
 
-Xcode 앱에서 생성한 가상 시편 파일을 Blender로 불러온 화면입니다. 사각 고리 형상과 적층 경계, 메시 구조를 확인할 수 있습니다. 앞서 소개한 Polycam 실물 시편 측정 결과와는 별도의 가상 데이터 확인 과정입니다.
+| 항목 | 소스 기본값 | 저장소 예제 |
+| --- | ---: | ---: |
+| 폭 × 깊이 × 높이 | 500 × 500 × 150 mm | 500 × 500 × 150 mm |
+| 층 수 / 층 높이 | 5층 / 30 mm | 6층 / 25 mm |
+| 벽 두께 | 40 mm | 40 mm |
 
-[화면 원본 보기](screenshots/xcode-export-blender-preview.png)
+예제 조건을 맞추려면 층 수를 6으로 바꾼 후 다시 생성합니다. OBJ·MTL·PNG를 같은 폴더에 두고 Blender에서 OBJ를 불러온 뒤 **재질 미리보기(Material Preview)**로 확인합니다. 좌표 단위는 m이며 X는 폭, Y는 높이, Z는 깊이, 원점은 바닥 중심입니다.
 
-## Blender에서 가상 시편 확인하기
+## 해석 범위와 남은 검증
 
-1. OBJ·MTL·PNG를 원래 파일명 그대로 같은 폴더에 둡니다.
-2. **파일 → 가져오기 → Wavefront (.obj)**에서 OBJ를 불러옵니다.
-3. **재질 미리보기(Material Preview)**로 전환합니다.
-4. 표면이 회색이면 재질의 **이미지 텍스처(Image Texture)** 노드를 확인하고, PNG를 **Principled BSDF → 기본 색상(Base Color)**에 연결합니다.
+- **실물 측정:** Polycam 재구성 메시의 치수 기록입니다. 기준값이 없어 MAE·RMSE·상대오차는 아직 산출하지 않았습니다. 측정 끝점과 수직·수평 정합, 독립 반복 스캔 횟수도 확인해야 합니다.
+- **가상 데이터:** 형상과 RGB 무늬를 생성한 예제입니다. PNG는 실제 표면 요철을 만들지 않으며, PLY에는 숨겨진 이상화된 면도 포함됩니다. 예제 PLY의 XYZ 좌표는 12,640개이고 CSV는 설정 형상으로 계산한 치수입니다. [생성 조건](examples/synthetic-specimen/DATA_NOTES.txt)
+- **앱 구현:** Swift 소스와 실행 화면은 제공됩니다. 실제 LiDAR 수집용 ARKit 기능과 Xcode 프로젝트 파일은 미포함이며, 빌드 환경 기록과 전체 내보내기 재현 검증은 추가해야 합니다. Blender의 RGB 텍스처 표시도 별도 확인 대상입니다.
 
-좌표 단위는 **미터(m)**입니다. X는 폭, Y는 높이, Z는 깊이이며 원점은 시편 바닥의 중심입니다. RGB 이미지는 외관만 바꾸며 형상의 거칠기를 추가하지 않습니다. PLY도 이상화된 모델 표면의 좌표이며 LiDAR 센서 시뮬레이션 결과는 아닙니다.
+## 다음 실험
 
-## 개발 및 연구 진행 상태
+1. 실물 시편의 Blender 측정점과 동일한 위치에서 기준 치수를 확보합니다.
+2. 같은 조건의 독립 반복 스캔과 동일 모델의 반복 클릭 측정을 구분해 기록합니다.
+3. 기준값과의 오차 및 반복성을 분석해 높이·길이·두께별 적용 범위를 평가합니다.
+4. 실제 사용한 Xcode 프로젝트와 실행 환경을 정리하고, 저장 파일의 형상·단위·텍스처 연결을 재현 확인합니다.
 
-| 항목 | 상태 |
+## 자료 구성
+
+| 위치 | 내용 |
 | --- | --- |
-| 시뮬레이터 시각화 | 실행 사진으로 확인 |
-| 가상 모델·텍스처 출력 | 예제 파일과 Swift 구현 소스 제공 |
-| Blender의 RGB 텍스처 표시 | 검증 중 |
-| Swift 소스 | RGB 텍스처 버전 ContentView.swift 원본 포함 |
-| Xcode 프로젝트 파일 | 미포함; 새 프로젝트에 소스를 적용하는 방법 제공 |
-| Polycam·Blender 실물 시편 기록 | 시편 4개, 치수 32개, 사진 5장 수록 |
-| 기준 치수와 비교한 정확도 검증 | 기준값 측정 대기 |
-| 자체 iOS 앱의 실제 LiDAR 스캔 | 확인되지 않음 |
-
-## 향후 계획
-
-1. Xcode 프로젝트 파일을 추가하고 컴파일·실행 환경과 내보내기 결과를 검증합니다.
-2. 앱과 Blender에서 RGB 텍스처가 일관되게 표시되는지 확인합니다.
-3. 실제 센서 데이터와 구분하여 가상 표면 거칠기와 샘플링 잡음을 시험합니다.
-4. 실물 시편의 동일 위치 기준 치수와 독립 반복 스캔을 확보하고, 측정 오차를 정량적으로 평가합니다.
-
-**연구 방향:** 스마트폰 RGB–LiDAR를 활용한 3D 프린팅 콘크리트 적층 형상 측정의 적용성과 한계 평가
+| [ios/](ios/) | Swift 원본, Xcode 실행 방법 |
+| [research/blender-measurements/](research/blender-measurements/) | 실물 시편 측정값, 원본 엑셀, Blender 화면 |
+| [examples/synthetic-specimen/](examples/synthetic-specimen/) | 가상 시편 OBJ·MTL·PNG·PLY·CSV와 생성 조건 |
+| [screenshots/](screenshots/) | iOS 실행 화면, 가상 시편의 Blender 확인 화면 |
