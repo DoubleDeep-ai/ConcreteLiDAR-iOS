@@ -91,7 +91,8 @@ ConcreteLiDAR-iOS/
 │       ├── iphone-lidar-3dcp-measurements.xlsx
 │       └── images/  (엑셀에 포함된 원본 사진 5장)
 ├── screenshots/
-│   └── ios-simulator-preview.png
+│   ├── ios-simulator-preview.png
+│   └── xcode-export-blender-preview.png
 └── examples/
     └── synthetic-specimen/
         ├── synthetic_specimen.obj
@@ -124,6 +125,14 @@ ConcreteLiDAR-iOS/
 - 실제 촬영, RGB–깊이 정합, 치수 오차 평가는 기기 실험과 기준 치수 확보가 필요합니다.
 
 원본 생성 조건은 [DATA_NOTES.txt](examples/synthetic-specimen/DATA_NOTES.txt)에 보존되어 있습니다.
+
+## Xcode 생성 파일의 Blender 확인 화면
+
+<img src="screenshots/xcode-export-blender-preview.png" alt="Xcode에서 생성한 가상 콘크리트 시편 파일을 Blender에서 불러와 형상과 메시를 확인한 화면" width="1000">
+
+Xcode 앱에서 생성한 가상 시편 파일을 Blender로 불러온 화면입니다. 사각 고리 형상과 적층 경계, 메시 구조를 확인할 수 있습니다. 앞서 소개한 Polycam 실물 시편 측정 결과와는 별도의 가상 데이터 확인 과정입니다.
+
+[화면 원본 보기](screenshots/xcode-export-blender-preview.png)
 
 ## Blender에서 가상 시편 확인하기
 
