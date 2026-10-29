@@ -1,0 +1,7 @@
+SYNTHETIC DATA ONLY. Not measured LiDAR.
+Coordinates: meters; X width, Y height, Z depth. Origin: base center.
+OBJ/PLY: explicit units in comments; import scale = 1.
+PLY: sampled model surfaces (10 mm maximum quad grid step), no RGB/confidence.
+Includes hidden interfaces between idealized layers and wall blocks. Not a scan simulation.
+CSV: analytic dimensions, not measurements. Cross-section = wall thickness * layer height, excluding corners.
+Texture: synthetic_texture.png, 1024x1024 pixels, generated RGB colors; not a camera capture. Each quad maps the same image over UV 0..1. Pattern scale is not calibrated and repeats. No geometric roughness or accuracy claim. OBJ always exports the texture even when preview toggle is OFF. Keep OBJ, MTL and PNG in the same folder. PLY remains XYZ only.
