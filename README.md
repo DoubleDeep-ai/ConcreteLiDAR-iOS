@@ -1,6 +1,6 @@
 # ConcreteLiDAR-iOS
 
-**Synthetic 3D-printed concrete specimen preview and export — research prototype**
+**Smartphone LiDAR research for 3D-printed concrete — Blender measurements and iOS prototype**
 
 <img src="screenshots/ios-simulator-preview.png" alt="ConcreteLiDAR iOS simulator run showing specimen preview, dimension controls and export actions" width="311">
 
@@ -8,13 +8,34 @@
 
 Early-stage iOS prototype assets for inspecting a synthetic layered concrete specimen, previewing a generated RGB texture, and exporting 3D geometry and dimensional data.
 
-> **Research status:** These are synthetic demonstration outputs, **not** iPhone LiDAR captures or validated dimensional measurements. The Swift/Xcode source code is not yet included.
+> **Research status:** Physical-specimen Blender measurement records are included separately from the synthetic iOS demonstration outputs. Reference dimensions are pending, so measurement accuracy has not yet been validated. The Swift/Xcode source code is not yet included.
 
 ## Research purpose
 
 Explore smartphone RGB–LiDAR workflows for evaluating layer height, width, cross-sectional area and shape error in 3D-printed concrete. The current synthetic specimen provides known nominal geometry for inspecting file formats and planning later comparisons with physical specimens.
 
-## Current specimen
+## Blender measurements of physical specimens
+
+**Four physical specimens · 32 recorded dimensions · five Blender images**
+
+The supplied workbook records Polycam GLTF captures dated **2026-09-14**, with dimensions measured on the reconstructed meshes in Blender. These measurements document the physical-specimen study; they are separate from the synthetic app example below.
+
+<img src="research/blender-measurements/images/p03-img4-measurements.png" alt="P03 Blender reconstructed mesh with height, side-length and thickness measurements" width="800">
+
+*P03 (IMG4): four corner heights, four side lengths and two wall thicknesses.*
+
+[All measurements and five images](research/blender-measurements/) · [Original Excel workbook](research/blender-measurements/iphone-lidar-3dcp-measurements.xlsx)
+
+| Specimen | Recorded dimensions | Height range (mm) | Side-length range (mm) |
+| --- | ---: | ---: | ---: |
+| P01 | 4 | 182.530–188.387 | 521.420–531.639 |
+| P02 | 8 | 138.320–153.652 | 510.924–521.241 |
+| P03 | 10 | 180.292–194.800 | 510.022–531.399 |
+| P04 | 10 | 110.582–117.409 | 527.003–538.684 |
+
+P03 also has two thickness records (37.154–46.772 mm); P04 has four (24.416–30.559 mm). Ranges describe different measurement locations, not accuracy or repeatability. Reference dimensions are not yet entered, so MAE, RMSE and relative error are unavailable. Photo-relative location labels and measurement alignment require verification.
+
+## Current synthetic specimen
 
 | Parameter | Nominal value |
 | --- | ---: |
@@ -50,6 +71,11 @@ The example assets are available in [examples/synthetic-specimen/](examples/synt
 ConcreteLiDAR-iOS/
 ├── README.md
 ├── .gitignore
+├── research/
+│   └── blender-measurements/
+│       ├── README.md
+│       ├── iphone-lidar-3dcp-measurements.xlsx
+│       └── images/  (five original workbook images)
 ├── screenshots/
 │   └── ios-simulator-preview.png
 └── examples/
@@ -102,14 +128,17 @@ Geometry coordinates are in **meters**, with X = width, Y = height, Z = depth, a
 | Synthetic model and texture export | Example outputs included; source implementation not supplied |
 | Blender RGB texture rendering | Under verification |
 | Swift / Xcode source available in repository | Not yet |
-| Real LiDAR capture and accuracy validation | Not yet |
+| Polycam / Blender physical-specimen records | Four specimens, 32 dimensions and five images included |
+| Accuracy validation against reference dimensions | Pending reference measurements |
+| Custom iOS app real LiDAR capture | Not demonstrated |
 
 ## Roadmap
 
 1. Add the original Swift/Xcode application source and reproducible build steps.
 2. Confirm consistent RGB texture rendering inside the app and in Blender.
 3. Test optional synthetic roughness and sampling noise, clearly separated from sensor data.
-4. Conduct physical specimen experiments and quantify errors against reference dimensions.
+4. Extend the physical-specimen study with matched reference dimensions and independent repeated scans, then quantify errors.
 
 **Research direction:** smartphone RGB–LiDAR-based evaluation of layered geometry in 3D concrete printing (3DCP).
+
 
