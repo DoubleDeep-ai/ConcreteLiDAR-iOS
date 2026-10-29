@@ -1,0 +1,12 @@
+# Xcode-generated files
+.DS_Store
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/xcuserdata/
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+# Credentials and signing data
+.env
+*.p12
+*.mobileprovision
