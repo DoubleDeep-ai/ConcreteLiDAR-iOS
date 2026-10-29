@@ -1,56 +1,60 @@
-# Blender measurements of physical 3DCP specimens
+# 실물 3DCP 시편의 Blender 측정 기록
 
-Polycam GLTF reconstructions were inspected in Blender to record corner heights, side lengths and wall thicknesses for four physical specimens. The workbook records the capture date as **2026-09-14** for all four specimens. These records are separate from the synthetic iOS demonstration assets.
+실물 시편 4개를 Polycam으로 스캔한 뒤 GLTF 재구성 메시를 Blender에서 열어 모서리 높이, 변 길이, 벽체 두께를 측정했습니다. 원본 엑셀에 기록된 촬영일은 네 시편 모두 **2026년 9월 14일**입니다. 이 자료는 가상 iOS 시편 예제와 구분되는 실물 시편 연구 기록입니다.
 
-[Download the original measurement workbook](iphone-lidar-3dcp-measurements.xlsx)
+[측정 기록 엑셀 원본 다운로드](iphone-lidar-3dcp-measurements.xlsx)
 
-## Measurement summary
+## 시편별 측정 요약
 
-32 recorded dimensions across P01–P04. Ranges below describe different locations on each specimen, not repeatability or measurement error.
+P01–P04의 치수 기록은 총 32개입니다. 아래 범위는 시편의 서로 다른 위치에서 측정한 값의 최솟값과 최댓값이며, 반복성이나 측정 오차를 의미하지 않습니다.
 
-| Specimen | Records | Height range (mm) | Side-length range (mm) | Thickness range (mm) |
+| 시편 | 기록 수 | 높이 범위 (mm) | 변 길이 범위 (mm) | 벽체 두께 범위 (mm) |
 | --- | ---: | ---: | ---: | ---: |
-| P01 | 4 | 182.530–188.387 | 521.420–531.639 | Not recorded |
-| P02 | 8 | 138.320–153.652 | 510.924–521.241 | Not recorded |
+| P01 | 4 | 182.530–188.387 | 521.420–531.639 | 미기록 |
+| P02 | 8 | 138.320–153.652 | 510.924–521.241 | 미기록 |
 | P03 | 10 | 180.292–194.800 | 510.022–531.399 | 37.154–46.772 |
 | P04 | 10 | 110.582–117.409 | 527.003–538.684 | 24.416–30.559 |
 
-## Interpretation
+## 측정값의 의미와 해석 범위
 
-- Values are dimensions of Polycam's reconstructed mesh measured in Blender, not raw LiDAR point measurements or outputs of the custom iOS app.
-- Workbook values are reported in millimeters; screen values in meters were converted by multiplying by 1,000. Displayed decimal places do not establish accuracy.
-- FRONT/BACK/LEFT/RIGHT are provisional labels relative to each specimen's photo, not shared coordinate axes. Endpoints and vertical/horizontal alignment still need verification.
-- Reference dimensions are blank, so MAE, RMSE and relative error are not available. The synthetic specimen's nominal dimensions must not be used as reference values for these physical specimens.
-- The 32 rows are individual dimensional records, not 32 independent scans. R01 is an identifying label; independent scan repetitions are not established for all specimens.
-- Source GLTF and Blender project files are not included in the supplied workbook. The images and records document the earlier measurements; this repository update does not rerun Blender analysis.
+- 기록된 값은 Polycam의 재구성 메시를 Blender에서 측정한 치수입니다. 원시 LiDAR 점군의 측정값이나 자체 iOS 앱의 출력값은 아닙니다.
+- 엑셀의 단위는 mm입니다. 화면에 m로 표시된 값은 1,000을 곱해 변환했습니다. 소수점 표시 자릿수가 측정 정확도를 의미하지는 않습니다.
+- FRONT(앞)·BACK(뒤)·LEFT(왼쪽)·RIGHT(오른쪽)는 각 시편 사진을 기준으로 붙인 임시 위치명이며 공통 좌표축이 아닙니다. 측정 끝점과 수직·수평 정합 여부는 확인이 필요합니다.
+- 기준 치수가 비어 있어 평균 절대오차(MAE), 평균제곱근오차(RMSE), 상대오차는 아직 산출할 수 없습니다. 가상 시편의 설정 치수를 이 실물 시편의 기준값으로 사용하지 않습니다.
+- 32개 행은 개별 치수 기록입니다. 독립 스캔 32회를 뜻하지 않습니다. R01은 자료 식별용 표기이며 모든 시편의 실제 독립 반복 횟수가 확인된 것은 아닙니다.
+- 제공된 엑셀에는 원본 GLTF와 Blender 프로젝트 파일이 포함되어 있지 않습니다. 아래 사진과 수치는 기존 측정 기록을 정리한 자료입니다.
 
-## Blender image records
+## Blender 측정 화면
 
-### P01 — dimensional measurements (IMG1)
+### P01 — 치수 측정 화면 (IMG1)
 
-![P01 — dimensional measurements (IMG1)](images/p01-img1-measurements.png)
+![P01 시편의 높이와 변 길이 측정 화면](images/p01-img1-measurements.png)
 
-### P01 — reconstructed shape overview (IMG2; same specimen, not an extra scan)
+### P01 — 재구성 형상 전체 보기 (IMG2)
 
-![P01 — reconstructed shape overview (IMG2; same specimen, not an extra scan)](images/p01-img2-overview.png)
+같은 시편을 보여주는 참고 화면이며 별도의 독립 스캔으로 집계하지 않습니다.
 
-### P02 — eight dimensions (IMG3)
+![P01 시편의 재구성 형상 전체 모습](images/p01-img2-overview.png)
 
-![P02 — eight dimensions (IMG3)](images/p02-img3-measurements.png)
+### P02 — 치수 8개 측정 (IMG3)
 
-### P03 — four heights, four side lengths and two thicknesses (IMG4)
+![P02 시편의 높이 4개와 변 길이 4개 측정 화면](images/p02-img3-measurements.png)
 
-![P03 — four heights, four side lengths and two thicknesses (IMG4)](images/p03-img4-measurements.png)
+### P03 — 높이 4개·변 길이 4개·두께 2개 (IMG4)
 
-### P04 — four heights, two side lengths and four thicknesses (IMG5)
+![P03 시편의 높이, 변 길이, 벽체 두께 측정 화면](images/p03-img4-measurements.png)
 
-![P04 — four heights, two side lengths and four thicknesses (IMG5)](images/p04-img5-measurements.png)
+### P04 — 높이 4개·변 길이 2개·두께 4개 (IMG5)
 
-## Complete measurement records
+![P04 시편의 높이, 변 길이, 벽체 두께 측정 화면](images/p04-img5-measurements.png)
 
-Source: original workbook, `측정기록` sheet, rows 9–40. Blank reference values remain unavailable.
+## 전체 측정값
 
-| Specimen | Item | Measurement (mm) | Source row |
+출처: 원본 엑셀의 `측정기록` 시트 9–40행. 기준값이 비어 있는 항목은 미확보 상태로 유지했습니다.
+
+측정항목 ID에서 H는 모서리 높이, L은 변 길이, T는 벽체 두께를 뜻합니다. ID는 엑셀과 대조할 수 있도록 원래 표기를 유지했습니다.
+
+| 시편 | 측정항목 ID | 측정값 (mm) | 엑셀 행 |
 | --- | --- | ---: | ---: |
 | P01 | H_FRONT | 182.53 | 9 |
 | P01 | H_RIGHT | 188.387 | 10 |
@@ -85,4 +89,4 @@ Source: original workbook, `측정기록` sheet, rows 9–40. Blank reference va
 | P04 | T_03 | 24.416 | 39 |
 | P04 | T_04 | 28.179 | 40 |
 
-P04 L_LEFT and L_BACK were not recorded. The 60° and 179° labels in IMG5 are angles and are excluded from the length records.
+P04의 L_LEFT·L_BACK은 기록되지 않았습니다. IMG5에 표시된 60°·179°는 각도이므로 길이 데이터에서 제외했습니다.
